@@ -1,3 +1,12 @@
+
+
+MAILGUN_URL = "https://api:#{API_KEY}@api.mailgun.net/v2/dorrit.epicodus.mailgun.org"
+
+ZEN_GUN_EMAIL = "tao.mind@zen.gun"
+
+CONTEMPLATION = "Your contemplation~~~"
+
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
@@ -6,17 +15,6 @@ require 'rspec/autorun'
 require 'webmock/rspec'
 require 'faraday'
 
-IN_URL = "http://localhost:3000"
-
-# API_KEY = 
-
-OUT_URL = "https://api:#{API_KEY}@api.mailgun.net/v2/dorrit.epicodus.mailgun.org"
-
-ZEN_GUN_EMAIL = "tao.mind@zen.gun"
-
-CONTEMPLATION = "Your contemplation~~~"
-
-# require 'quotes'
 
 
 # Requires supporting ruby files with custom matchers and macros, etc,

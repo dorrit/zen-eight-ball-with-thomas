@@ -35,13 +35,17 @@ describe InNote do
   end
 
   context '#respond' do
-    it 'POSTs to the OutNote Controllers to POST' do
-     note = InNote.new(response)
-     stub =  stub_request(:post, "http://zengun.fwd.wf/out_notes").
-         with(:body => 'to=Thomas+Hopkins+%3Chopkins.tc%40gmail.com%3E')
-     note.respond
-     stub.should have_been_requested
+    it 'creates an instance of out_note and imparts it' do
+      stub = stub_request(:post, "#{MAILGUN_URL}/messages").
+        with(:body => {:to => "Thomas Hopkins <hopkins.tc@gmail.com>", :from => ZEN_GUN_EMAIL, :subject => CONTEMPLATION, :text => "The Tao is the way."})
+      Array.any_instance.stub(:sample).and_return("The Tao is the way.")
+      out_note = double
+      OutNote.stub(:new).and_return(out_note)
+      out_note.should_receive(:impart)
+      in_note = InNote.new(response)
+      in_note.respond
     end
+
   end
 
 end

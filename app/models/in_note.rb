@@ -1,6 +1,7 @@
 class InNote
 
   attr_reader :from, :text, :sender, :subject
+  LOCAL_URL = "http://zengun.fwd.wf"
 
   def initialize(attributes)
     @from = attributes["from"]
@@ -9,11 +10,16 @@ class InNote
     @subject = attributes["subject"]
   end
 
+  # def respond
+  #   #post to a url/outnotes, include @from
+  #   response = Faraday.post do |request|
+  #     request.url "#{LOCAL_URL}/out_notes"
+  #     request.body = {:to => @from}
+  #   end
+  # end
+
   def respond
-    #post to a url/outnotes, include @from
-    response = Faraday.post do |request|
-      request.url "http://zengun.fwd.wf/out_notes"
-      request.body = {:to => @from}
-    end
+    out_note = OutNote.new(:to => @from)
+    out_note.impart
   end
 end

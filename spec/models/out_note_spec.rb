@@ -9,22 +9,11 @@ describe OutNote do
     end
   end
 
-  # context '#zenify!' do
-  #   it 'picks a random quote from an array of quotes' do
-  #     Kernel.stub(:rand).and_return(1)
-  #     note = OutNote.new(:to => 'dorrit')
-  #     note.text.should be_nil
-  #     note.zenify!
-  #     note.text.should eq 'simplicity'
-  #   end
-  # end
-
   context '#impart' do
     it 'POSTs the out_note to the server' do
       note = OutNote.new(:to => 'dorrit')
-      # note.zenify!
-      stub = stub_request(:post, "#{OUT_URL}/messages").
-        with(:body => {:to => note.to, :from => note.from, :subject => note.subject, :text => note.text})
+      stub = stub_request(:post, "#{MAILGUN_URL}/messages")
+        # with(:body => {:to => 'dorrit', :from => ZEN_GUN_EMAIL, :subject => CONTEMPLATION, :text => note.text})
       note.impart
       stub.should have_been_requested
     end
